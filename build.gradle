@@ -12,6 +12,7 @@ plugins {
      */
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '0.15.0'
+    id 'maven-publish'
     /**
      * Versioning applied to itself
      */
@@ -75,6 +76,18 @@ gradlePlugin {
             displayName = 'Versioning plugin for Gradle'
             description = 'Gradle plug-in that computes version information from the SCM'
             implementationClass = 'net.nemerosa.versioning.VersioningPlugin'
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            url = version.endsWith("SNAPSHOT") ? "${enterpriseRepositorySnapshots}" : "${enterpriseRepositoryReleases}"
+            credentials {
+                username = "${enterpriseRepositoryUser}"
+                password = "${enterpriseRepositoryPassword}"
+            }
         }
     }
 }
