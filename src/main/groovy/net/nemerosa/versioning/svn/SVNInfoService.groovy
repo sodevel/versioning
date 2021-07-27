@@ -84,7 +84,7 @@ class SVNInfoService implements SCMInfoService {
             LOGGER.info("Entry: \"" + entry.file + "\" nodeStatus: " + entry.nodeStatus + ", propertiesStatus: " + entry.propertiesStatus)
             def path = (entry.file.absolutePath - dir.absolutePath)
             if (path && !path.startsWith('/userHome')) {
-                return (entry.nodeStatus != SVNStatusType.UNCHANGED && entry.nodeStatus != SVNStatusType.STATUS_EXTERNAL) || (entry.propertiesStatus != SVNStatusType.UNCHANGED)
+                return !(entry.nodeStatus == SVNStatusType.UNCHANGED && entry.propertiesStatus == SVNStatusType.UNCHANGED) && entry.nodeStatus != SVNStatusType.STATUS_EXTERNAL
             } else {
                 return false
             }
