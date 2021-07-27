@@ -81,6 +81,7 @@ class SVNInfoService implements SCMInfoService {
         if (statuses.empty) return false
         // Checks every entry
         def dirtyEntry = statuses.find { entry ->
+            LOGGER.info("Entry: \"" + entry.file + "\" nodeStatus: " + entry.nodeStatus + ", propertiesStatus: " + entry.propertiesStatus)
             def path = (entry.file.absolutePath - dir.absolutePath)
             if (path && !path.startsWith('/userHome')) {
                 return (entry.nodeStatus != SVNStatusType.UNCHANGED && entry.nodeStatus != SVNStatusType.STATUS_EXTERNAL) || (entry.propertiesStatus != SVNStatusType.UNCHANGED)
