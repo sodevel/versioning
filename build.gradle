@@ -33,7 +33,7 @@ plugins {
  */
 
 group = 'net.nemerosa'
-version = versioning.info.display
+version = '2.14.1-SNAPSHOT'
 
 /**
  * Dependencies
